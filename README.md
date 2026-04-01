@@ -23,8 +23,8 @@ Los usuarios pueden:
 
 ### Links
 
-- Repositorio: [github.com/TU-USUARIO/blog-preview-card](https://github.com/TU-USUARIO/blog-preview-card)
-- Sitio en vivo: [TU-USUARIO.github.io/blog-preview-card](https://TU-USUARIO.github.io/blog-preview-card)
+- Repositorio: [https://github.com/yereGOD251/blog-preview-card](https://github.com/TU-USUARIO/blog-preview-card)
+- Sitio en vivo: [https://yeregod251.github.io/blog-preview-card/](https://TU-USUARIO.github.io/blog-preview-card)
 
 ## Construido con
 
