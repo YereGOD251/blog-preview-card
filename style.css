@@ -21,18 +21,22 @@
    Custom properties
    =========================== */
 :root {
-  --clr-yellow:   hsl(47, 88%, 63%);
-  --clr-white:    hsl(0, 0%, 100%);
-  --clr-gray-500: hsl(0, 0%, 42%);
-  --clr-gray-950: hsl(0, 0%, 7%);
+  --clr-yellow:        hsl(47, 88%, 63%);
+  --clr-yellow-dark:   hsl(47, 88%, 50%);  /* FIX: hover color ahora en variable */
+  --clr-white:         hsl(0, 0%, 100%);
+  --clr-gray-500:      hsl(0, 0%, 42%);
+  --clr-gray-950:      hsl(0, 0%, 7%);
 
-  --ff-base: 'Figtree', sans-serif;
-  --fw-medium:    500;
-  --fw-extrabold: 800;
+  --ff-base:           'Figtree', sans-serif;
+  --fw-medium:         500;
+  --fw-extrabold:      800;
 
-  --radius-card:  20px;
-  --radius-image: 10px;
-  --radius-tag:   4px;
+  --radius-card:       20px;
+  --radius-image:      10px;
+  --radius-tag:        4px;
+
+  /* FIX: max-width en rem en lugar de px */
+  --card-max-width:    24rem;
 }
 
 /* ===========================
@@ -81,9 +85,23 @@ body {
   border: 1px solid var(--clr-gray-950);
   border-radius: var(--radius-card);
   box-shadow: 8px 8px 0 var(--clr-gray-950);
-  max-width: 384px;
+
+  /* FIX: rem en lugar de px */
+  max-width: var(--card-max-width);
   width: 100%;
+
+  /* FIX: prefers-reduced-motion aplicado aquí también */
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* FIX: respeta la preferencia del usuario de reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card__image,
+  .card__tag,
+  .card__title-link {
+    transition: none;
+  }
 }
 
 /* --- imagen --- */
@@ -114,7 +132,8 @@ body {
 
 /* --- body --- */
 .card__body {
-  padding: 1.5rem;
+  /* FIX: clamp() para padding más flexible y responsive */
+  padding: clamp(1rem, 4vw, 1.5rem);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -134,7 +153,8 @@ body {
 }
 
 .card__tag:hover {
-  background-color: hsl(47, 88%, 50%);
+  /* FIX: usando variable en lugar de valor hardcodeado */
+  background-color: var(--clr-yellow-dark);
 }
 
 .card__tag:focus-visible {
@@ -177,12 +197,14 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 0.25rem;
+
+  /* FIX: logical property en lugar de margin-top */
+  margin-block-start: 0.25rem;
 }
 
 .card__avatar {
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -210,10 +232,15 @@ body {
 }
 
 /* ===========================
-   Responsive
+   Responsive — FIX: mobile-first con min-width
+   y unidades em en el media query
    =========================== */
-@media (max-width: 375px) {
+.card__title {
+  font-size: 1.125rem;
+}
+
+@media (min-width: 23.4375em) {
   .card__title {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 }
